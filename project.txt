@@ -1,0 +1,265 @@
+create table my_users (
+user_id number,
+user_name varchar2(20),
+user_password varchar2(20),
+user_activated number default 0,
+primary key(user_id));
+
+insert into my_users values (my_users_seq.nextval,'admin','123456',1);
+
+insert into my_users values (my_users_seq.nextval,'user1','user123',1);
+
+insert into my_users values (my_users_seq.nextval,'user2','user2123',1);
+
+insert into my_users values (my_users_seq.nextval,'user3','user3123',1);
+
+ALTER TABLE RIDER add Country varchar2(40);
+ALTER TABLE RIDER add file_lob blob;
+ALTER TABLE RIDER add file_name varchar2(40);
+ALTER TABLE RIDER add file_mimetype varchar2(40);
+ALTER TABLE RIDER add file_updatedate varchar2(40);
+ALTER TABLE RIDER add file_characterset varchar2(40);
+
+ALTER TABLE RIDER rename column Country to Country_Code;
+
+ALTER TABLE TEAMS add file_lob blob;
+ALTER TABLE TEAMS add file_name varchar2(40);
+ALTER TABLE TEAMS add file_mimetype varchar2(40);
+ALTER TABLE TEAMS add file_updatedate varchar2(40);
+ALTER TABLE TEAMS add file_characterset varchar2(40);
+
+ALTER TABLE TEAMS add file_lob blob;
+ALTER TABLE TEAMS add file_name varchar2(40);
+ALTER TABLE TEAMS add file_mimetype varchar2(40);
+ALTER TABLE TEAMS add file_updatedate varchar2(40);
+ALTER TABLE TEAMS add file_characterset varchar2(40);
+
+ALTER TABLE TEAMS drop column file_lob;
+ALTER TABLE TEAMS drop column file_name;
+ALTER TABLE TEAMS drop column file_mimetype;
+ALTER TABLE TEAMS drop column file_updatedate;
+ALTER TABLE TEAMS drop column file_characterset;
+
+
+insert into RIDER values(1,'EGAN BERNAL',to_date('13/Jan/1997','dd/mm/yyyy'),'INEOS GRENADIERS','COL');
+insert into RIDER values(2,'ANDREY AMADOR',to_date('29/Aug/1986','dd/mm/yyyy'),'INEOS GRENADIERS','CRC');
+insert into RIDER values(3,'RICHARD CARAPAZ',to_date('29/May/1993','dd/mm/yyyy'),'INEOS GRENADIERS','ECU');
+insert into RIDER values(4,'JONATHAN CASTROVIEJO',to_date('27/Apr/1987','dd/mm/yyyy'),'INEOS GRENADIERS','ESP');
+insert into RIDER values(5,'MICHAL KWIATKOWSKI',to_date('02/Jun/1990','dd/mm/yyyy'),'INEOS GRENADIERS','POL');
+insert into RIDER values(6,'LUKE ROWE',to_date('10/Mar/1990','dd/mm/yyyy'),'INEOS GRENADIERS','GRB');
+insert into RIDER values(7,'PAVEL SIVAKOV',to_date('11/Jul/1997','dd/mm/yyyy'),'INEOS GRENADIERS','RUS');
+insert into RIDER values(8,'DYLAN VAN BAARLE',to_date('21/May/1992','dd/mm/yyyy'),'INEOS GRENADIERS','NED');
+
+
+
+insert into TEAMS values('INEOS GRENADIERS',0,5,7,'GREAT BRITAIN');
+insert into TEAMS values('TEAM JUMBO - VISMA',3,2,0,'NETHERLANDS');
+insert into TEAMS values('BORA - HANSGROHE',1,14,0,'GERMANY');
+
+insert into RIDER values(11,'PRIMOŽ ROGLIC',to_date('29/Oct/1989','dd/mm/yyyy'),'TEAM JUMBO - VISMA','SLO');
+insert into RIDER values(12,'GEORGE BENNETT',to_date('07/Apr/1990','dd/mm/yyyy'),'TEAM JUMBO - VISMA','NZL');
+insert into RIDER values(13,'AMUND GRØNDAHL JANSEN',to_date('11/Feb/1994','dd/mm/yyyy'),'TEAM JUMBO - VISMA','NOR');
+insert into RIDER values(14,'TOM DUMOULIN',to_date('11/Nov/1990','dd/mm/yyyy'),'TEAM JUMBO - VISMA','NED');
+insert into RIDER values(15,'ROBERT GESINK',to_date('31/May/1986','dd/mm/yyyy'),'TEAM JUMBO - VISMA','SEPP');
+insert into RIDER values(16,'SEPP KUSS',to_date('13/Sep/1994','dd/mm/yyyy'),'TEAM JUMBO - VISMA','USA');
+insert into RIDER values(17,'TONY MARTIN',to_date('23/Apr/1985','dd/mm/yyyy'),'TEAM JUMBO - VISMA','GER');
+insert into RIDER values(18,'WOUT VAN AERT',to_date('15/Sep/1994','dd/mm/yyyy'),'TEAM JUMBO - VISMA','BEL');
+
+
+insert into stages values ('STAGE 1',to_date('29/Aug/2020','dd/mm/yyyy'),'156 KM','NICE MOYEN PAYS>NICE','FLAT');
+insert into stages values ('STAGE 2',to_date('30/Aug/2020','dd/mm/yyyy'),'186 KM','NICE HAUT PAYS > NICE','MOUNTAIN');
+insert into stages values ('STAGE 3',to_date('31/Aug/2020','dd/mm/yyyy'),'198 KM','NICE > SISTERON','FLAT');
+insert into stages values ('STAGE 4',to_date('01/Sep/2020','dd/mm/yyyy'),'160.5 KM','SISTERON > ORCIÈRES-MERLETTE','HILLY');
+insert into stages values ('STAGE 5',to_date('02/Sep/2020','dd/mm/yyyy'),'183 KM','GAP > PRIVAS','FLAT');
+insert into stages values ('STAGE 6',to_date('03/Sep/2020','dd/mm/yyyy'),'191 KM','LE TEIL > MONT AIGOUAL','HILLY');
+insert into stages values ('STAGE 7',to_date('04/Sep/2020','dd/mm/yyyy'),'168 KM','MILLAU > LAVAUR','FLAT');
+insert into stages values ('STAGE 8',to_date('05/Sep/2020','dd/mm/yyyy'),'141 KM','CAZÈRES-SUR-GARONNE > LOUDENVIELLE','MOUNTAIN');
+insert into stages values ('STAGE 9',to_date('06/Sep/2020','dd/mm/yyyy'),'153 KM','PAU > LARUNS','MOUNTAIN');
+
+insert into points_and_time values (17,17363,11,'','STAGE 17'); 
+
+insert into RIDER_STAGES values (155,'STAGE 1','outside the time limit'); 
+insert into RIDER_STAGES values (68,'STAGE 2','DNS');
+insert into RIDER_STAGES values (157,'STAGE 2','DNS');
+insert into RIDER_STAGES values (126,'STAGE 3','withdrawal');
+
+Select RIDER_Rider_No_, Withdraw
+from RIDER_STAGES
+where STAGES_Stage_No_ =:P5_STAGE
+
+select name,max from (select max(salary) as max from instructor),instructor
+where salary=max
+union
+SELECT name, max from (select max(salary) as max from instructor where Salary < ( SELECT Max(Salary) FROM instructor)),instructor
+where salary=max
+union
+SELECT name, max from (select max(salary) as max from instructor where Salary <(select max(salary) from instructor where Salary < ( SELECT Max(Salary) FROM instructor))),instructor
+where salary=max
+order by max desc; 
+
+
+select rider_rider_no_, min from (select min(time_in_seconds) as min from points_and_time),points_and_time
+where time_in_seconds=min
+union
+SELECT rider_rider_no_, min from (select min(time_in_seconds) as min from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time)),points_and_time
+where time_in_seconds=min
+union
+SELECT rider_rider_no_, min from (select min(time_in_seconds) as min from points_and_time where time_in_seconds >(select min(time_in_seconds) from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time))),points_and_time
+where time_in_seconds=min
+order by min;
+
+
+select rider_no_, min from (select min(time_in_seconds) as min from points_and_time),points_and_time
+where stage_number=:P2_NEW and time_in_seconds=min
+union
+SELECT rider_no_, min from (select min(time_in_seconds) as min from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time)),points_and_time
+where stage_number=:P2_NEW and time_in_seconds=min
+union
+SELECT rider_no_, min from (select min(time_in_seconds) as min from points_and_time where time_in_seconds >(select min(time_in_seconds) from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time))),points_and_time
+where stage_number=:P2_NEW and time_in_seconds=min
+order by min;
+
+
+select name, rider_no_, min as Times from (select min(time_in_seconds) as min from points_and_time),points_and_time natural join rider
+where stage_number=:P3_STAGE and time_in_seconds=min
+union
+SELECT name, rider_no_, min as Times from (select min(time_in_seconds) as min from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time)),points_and_time natural join rider
+where stage_number=:P3_STAGE and time_in_seconds=min
+union
+SELECT name ,rider_no_, min as Times from (select min(time_in_seconds) as min from points_and_time where time_in_seconds >(select min(time_in_seconds) from points_and_time where time_in_seconds > ( SELECT Min(time_in_seconds) FROM points_and_time))),points_and_time natural join rider
+where stage_number=:P3_STAGE and time_in_seconds=min
+order by Times;
+
+----------------------------------1st three riders----------------------------
+select stage_no_ as d, stage_no_ as t
+from stages
+order by race_date;
+
+select name, rider_no_, min from (select max(time_in_seconds) as min from (select time_in_seconds from points_and_time where stage_number =:P21_STAGE)),points_and_time natural join rider
+where stage_number =:P21_STAGE and time_in_seconds=min
+union
+SELECT name, rider_no_, min from (select max(time_in_seconds) as min from points_and_time where time_in_seconds < ( SELECT Max(time_in_seconds) FROM (select time_in_seconds from points_and_time where stage_number =:P21_STAGE))),points_and_time natural join rider
+where stage_number =:P21_STAGE and time_in_seconds=min
+union
+SELECT name, rider_no_, min from (select max(time_in_seconds) as min from points_and_time where time_in_seconds <(select max(time_in_seconds) from points_and_time where time_in_seconds < ( SELECT Max(time_in_seconds) FROM (select time_in_seconds from points_and_time where stage_number =:P21_STAGE)))),points_and_time natural join rider
+where stage_number =:P21_STAGE and time_in_seconds=min
+order by min;
+
+
+-----------------------------young rider-------------------------------
+select distinct name, rider_no_, max as Times from (select max(time_in_seconds) as max from(select * from points_and_time natural join rider where Birth<'12/12/1986')),points_and_time natural join rider
+where time_in_seconds=max
+
+------------------------------------work-------------------------------
+select name, rider_no_,Point from (select rider_no_, sum(flat_point) as Point from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <= '9/20/2020' group by Rider_no_) natural Join Rider
+order by Point desc;
+
+select distinct points_and_time.rider_no_,Point from (select rider_no_, sum(flat_point) as Point from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <='9/20/2020' group by Rider_no_),stages, points_and_time
+where race_date='9/20/2020' and points_and_time.Stage_Number=stages.stage_no_
+order by Point desc;
+
+-----------------------Points Ranking g--------------
+select distinct name, t.rider_no_, sum from (select rider_no_, SUM(FLAT_POINT) as sum from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <=:P7_NEW group by Rider_no_) t,stages, points_and_time, rider
+where race_date=:P7_NEW and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+order by rider_no_;
+
+select stage_no_ as d, race_date as t
+from stages
+order by race_date;
+
+---------------------Points Ranking s-------------
+select distinct name, rider_no_, FLAT_point from points_and_time natural join rider
+where Stage_number='STAGE 1'
+order by FLAT_point desc
+
+select stage_no_ as d, stage_no_ as t
+from stages
+order by race_date;
+
+-----------------------Youth Ranking s----------------
+select distinct name, rider_no_, time_in_seconds from (select * from points_and_time natural join rider where Birth<='01/01/1996') t
+where Stage_number='STAGE 1'
+order by time_in_seconds desc
+
+-----------------------Youth Ranking g----------------
+select distinct name, t.rider_no_, Times from (select rider_no_, SUM(time_in_seconds) as Times from (select * from points_and_time natural join rider where Birth<='01/01/1996') t1, stages
+where t1.Stage_Number=stages.stage_no_ and race_date <='8/31/2020' group by Rider_no_) t,stages, points_and_time, rider
+where race_date='8/31/2020' and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+order by Times;
+
+select stage_no_ as d, race_date as t
+from stages
+order by race_date;
+
+
+---------------------Indivisual Ranking s-------------
+select distinct name, rider_no_, time_in_seconds from points_and_time natural join rider
+where Stage_number='STAGE 1'
+order by time_in_seconds
+
+select stage_no_ as d, stage_no_ as t
+from stages
+order by race_date;
+
+
+
+---------------------Indivisual Ranking g-------------
+select distinct name, t.rider_no_, Times from (select rider_no_, SUM(time_in_seconds) as Times from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <=:P7_NEW group by Rider_no_) t,stages, points_and_time, rider
+where race_date=:P7_NEW and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+order by Times;
+
+select stage_no_ as d, race_date as t
+from stages
+order by race_date;
+
+
+
+---------------------climmb Ranking g-------------
+select distinct name, t.rider_no_, Points from (select rider_no_, SUM(Hill_POINT) as Points from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <=:P7_NEW group by Rider_no_) t,stages, points_and_time, rider
+where race_date=:P7_NEW and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+order by Points desc;
+
+select stage_no_ as d, race_date as t
+from stages
+order by race_date;
+
+---------------------climber Ranking s-------------
+select distinct name, rider_no_, Hill_point from points_and_time natural join rider
+where Stage_number='STAGE 1'
+order by time_in_seconds
+
+select stage_no_ as d, stage_no_ as t
+from stages
+order by race_date;
+
+-------work----
+select STAGES_Stage_No_,count(RIDER_Rider_No_) from RIDER_STAGES, stages
+where RIDER_STAGES.STAGES_Stage_No_= stages.stage_No_
+group by STAGES_Stage_No_
+order by race_date;
+
+
+decode(nvl(dbms_lob.getlength(FILE_LOB),0),0,null,
+	   '<img alt="Altr text" src="' || apex_util.get_blob_file_src('P18_FILE_LOB',ROWID) || '" width = "75"/>') "IMAGE",
+
+
+-----------------------------younger rider----------------
+select distinct name, t.rider_no_, min(Times) as Time from (select rider_no_, SUM(time_in_seconds) as Times from (select * from points_and_time natural join rider where Birth>='01/01/1996') t1, stages
+where t1.Stage_Number=stages.stage_no_ group by Rider_no_) t,stages, points_and_time, rider
+where time_in_seconds=Time and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_;
+
+
+select distinct name, t.rider_no_, min(Times) as min from (select rider_no_, SUM(time_in_seconds) as Times from (select * from points_and_time natural join rider where Birth>='01/01/1996') t1, stages
+where t1.Stage_Number=stages.stage_no_ group by Rider_no_) t,stages, points_and_time, rider
+where time_in_seconds=min and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+
+
+select distinct name, t.rider_no_, Times from (select rider_no_, SUM(time_in_seconds) as Times from points_and_time, stages
+where points_and_time.Stage_Number=stages.stage_no_ and race_date <=:P28_NEW group by Rider_no_) t,stages, points_and_time, rider
+where race_date=:P28_NEW and  points_and_time.rider_no_=t.rider_no_ and points_and_time.Stage_Number=stages.stage_no_ and points_and_time.rider_no_=rider.rider_no_
+order by Times;
